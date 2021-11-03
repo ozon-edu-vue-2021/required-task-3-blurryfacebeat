@@ -3,7 +3,7 @@
     <h3>Карта офиса</h3>
 
     <div v-if="!isLoading" class="map-root">
-      <MapImage ref="mapImage" v-click-outside="emitCloseEmployeeCard" />
+      <MapImage ref="mapImage" />
 
       <TableImage v-show="false" ref="tableImage" />
     </div>

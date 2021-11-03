@@ -8,14 +8,20 @@
         <b>{{ person.name }} ({{ person.age }})</b>
       </div>
 
-      <div class="person__info-email">Почта: {{ person.email }}</div>
-      <div class="person__info-email">Дата регистрации: {{ formatedDate }}</div>
+      <a class="person__info-email" :href="`mailto:${person.email}`"
+        >Почта: {{ person.email }}</a
+      >
+      <div class="person__info-email">
+        Дата регистрации: {{ formattedDate }}
+      </div>
       <div class="person__info-about">О себе: {{ person.about }}</div>
     </div>
   </div>
 </template>
 
 <script>
+import { format } from "date-fns";
+
 export default {
   props: {
     person: {
@@ -24,8 +30,8 @@ export default {
     },
   },
   computed: {
-    formatedDate() {
-      return this.person.registered;
+    formattedDate() {
+      return format(new Date(this.person.registered), "dd.MM.yyyy hh:mm");
     },
   },
 };
@@ -36,6 +42,10 @@ export default {
   display: grid;
   grid-template-columns: 50px 1fr;
   grid-gap: 8px;
+}
+
+a.person__info-email {
+  cursor: pointer;
 }
 
 .person__photo img {
